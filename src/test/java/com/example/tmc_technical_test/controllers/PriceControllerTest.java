@@ -1,26 +1,11 @@
 package com.example.tmc_technical_test.controllers;
 
-import com.example.tmc_technical_test.dto.ApiPriceDTO;
-import com.example.tmc_technical_test.entities.BrandEntity;
-import com.example.tmc_technical_test.entities.PriceEntity;
-import com.example.tmc_technical_test.models.PriceDTO;
 import com.example.tmc_technical_test.services.PriceServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apiguardian.api.API;
-import org.junit.jupiter.api.Test;
-import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.threeten.bp.OffsetDateTime;
-
-import java.math.BigDecimal;
-
 
 @WebMvcTest
 class PriceControllerTest {

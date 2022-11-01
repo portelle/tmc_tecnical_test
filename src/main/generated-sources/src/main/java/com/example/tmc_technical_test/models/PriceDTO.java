@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
-import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -28,10 +27,10 @@ public class PriceDTO   {
   private Integer priceList = null;
 
   @JsonProperty("startDate")
-  private OffsetDateTime startDate = null;
+  private String startDate = null;
 
   @JsonProperty("endDate")
-  private OffsetDateTime endDate = null;
+  private String endDate = null;
 
   @JsonProperty("price")
   private BigDecimal price = null;
@@ -96,7 +95,7 @@ public class PriceDTO   {
     this.priceList = priceList;
   }
 
-  public PriceDTO startDate(OffsetDateTime startDate) {
+  public PriceDTO startDate(String startDate) {
     this.startDate = startDate;
     return this;
   }
@@ -107,16 +106,15 @@ public class PriceDTO   {
    **/
   @Schema(description = "Beginning of the price validity")
   
-    @Valid
-    public OffsetDateTime getStartDate() {
+    public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(OffsetDateTime startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public PriceDTO endDate(OffsetDateTime endDate) {
+  public PriceDTO endDate(String endDate) {
     this.endDate = endDate;
     return this;
   }
@@ -127,12 +125,11 @@ public class PriceDTO   {
    **/
   @Schema(description = "Ending of the price validity")
   
-    @Valid
-    public OffsetDateTime getEndDate() {
+    public String getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(OffsetDateTime endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 

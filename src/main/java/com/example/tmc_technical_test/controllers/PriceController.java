@@ -2,8 +2,6 @@ package com.example.tmc_technical_test.controllers;
 
 import com.example.tmc_technical_test.api.PriceApi;
 
-import com.example.tmc_technical_test.dto.ApiPriceDTO;
-
 import com.example.tmc_technical_test.models.PriceDTO;
 import com.example.tmc_technical_test.services.PriceService;
 import com.example.tmc_technical_test.services.PriceServiceImpl;
