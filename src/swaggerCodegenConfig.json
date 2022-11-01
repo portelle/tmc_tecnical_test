@@ -1,0 +1,10 @@
+{
+  "hideGenerationTimestamp" : true,
+  "generateSupportingFiles" : false,
+  "interfaceOnly" : true,
+  "apiPackage" : "com.example.tmc_technical_test.api",
+  "modelPackage" : "com.example.tmc_technical_test.models",
+  "importMappings": {
+    "java.time.OffsetDateTime": "java.time.LocalDateTime"
+  }
+}

@@ -1,0 +1,63 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+	//Swagger code generator plugin
+	id 'org.hidetake.swagger.generator' version '2.19.2'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.swagger:swagger-annotations:1.6.8'
+	implementation 'io.swagger.core.v3:swagger-core:2.2.4'
+	implementation 'org.threeten:threetenbp:1.6.3'
+
+
+	swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.35'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+swaggerSources{
+	tmcTechTest {
+		inputFile = file('src/main/resources/price-api.yaml')
+		code {
+			language = 'spring'
+			library = 'spring-boot'
+			components = ['models', 'apis']
+			configFile = file('src/swaggerCodegenConfig.json')
+			outputDir = file("src/main/generated-sources")
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', 'src/main/generated-sources/src/main/java']
+		}
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

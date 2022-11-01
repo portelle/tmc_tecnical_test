@@ -1,0 +1,143 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: Price Service
+  description: Query API that answers the applicable price
+
+tags:
+  - name: "Price API"
+
+paths:
+
+  /price:
+    get:
+      summary: Endpoint that answers the final price to apply
+      tags:
+        - "Price"
+      description: Endpoint description
+      operationId: getPrice
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description:  Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/PriceDTO'
+        "400":
+          description: Server can't process the request
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Price:
+      description: Price model that represents the applicable price duringa period of time for a product
+      type: object
+      properties:
+        brandId:
+          description: Foreign key that represents the brand
+          type: integer
+          example: 1
+        startDate:
+          description: Beginning of the price validity
+          type: string
+          format: date-time
+#          pattern: '^2[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}.[0-9]{2}.[0-9]{2}$'
+#          example:  2020-06-14-00.00.00
+        endDate:
+          description: Ending of the price validity
+          type: string
+          format: date-time
+#          pattern: '^2[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}.[0-9]{2}.[0-9]{2}$'
+#          example: 2020-12-31-23.59.59
+        priceList:
+          description:  Identifier of the applicable price list
+          type: integer
+          example: 1
+        productId:
+          description:  Product identifier code
+          type: integer
+          example: 12345
+        priority:
+          description:  If there are two coincident prices on the same data range highest priority (highest number) should be used.
+          type: integer
+          example: 9
+        price:
+          description:  Final selling price
+          type: number
+          multipleOf: 0.01
+          example: 99.99
+        currency:
+          description: Currency name as defined on the ISO 4217
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: EUR
+    PriceDTO:
+      description: Price model that represents the applicable price during a period of time for a product
+      type: object
+      properties:
+        productId:
+          description: Product identifier code
+          type: integer
+          example: 12345
+        brandId:
+          description: Foreign key that represents the brand
+          type: integer
+          example: 1
+        priceList:
+          description: Identifier of the applicable price list
+          type: integer
+          example: 1
+        startDate:
+          description: Beginning of the price validity
+          type: string
+          format: date-time
+#          pattern: '^2[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}.[0-9]{2}.[0-9]{2}$'
+#          example: 2020-06-14-00.00.00
+        endDate:
+          description: Ending of the price validity
+          type: string
+          format: date-time
+#          pattern: '^2[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}.[0-9]{2}.[0-9]{2}$'
+#          example: 2020-12-31-23.59.59
+        price:
+          description: Final selling price
+          type: number
+          multipleOf: 0.01
+          example: 99.99
+        currency:
+          description: Currency name as defined on the ISO 4217
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: EUR
+    Brand:
+      description: Brand model
+      type: object
+      properties:
+        id:
+          description: Product identifier code
+          type: integer
+          example: 1
+        brandName:
+          description: Product identifier code
+          type: string
+          example: Zara
