@@ -26,7 +26,7 @@ public class PriceController implements PriceApi {
 
     @Override
     public ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, String date) {
-        return priceService.getPrice(productId, brandId, OffsetDateTime.of(LocalDate.parse(date, DateTimeFormatter.ISO_DATE), LocalTime.MIN, ZoneOffset.UTC));
+        return priceService.getPrice(productId, brandId, date);
     }
 
 }

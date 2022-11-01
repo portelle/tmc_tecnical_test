@@ -19,8 +19,8 @@ public class PriceServiceImpl implements PriceService {
     PriceRepository priceRepository;
 
     @Override
-    public ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, OffsetDateTime date) {
-        List<PriceEntity> priceEntitiesList = priceRepository.findAll();
+    public ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, String date) {
+        List<PriceEntity> priceEntitiesList = priceRepository.findByStartDateGreaterThanEqualAndEndDateLessThanEqual(date, date);
         PriceDTO priceDTO = new PriceDTO();
         priceDTO.setProductId(priceEntitiesList.get(0).getProductId());
         priceDTO.setPrice(priceEntitiesList.get(0).getPrice());

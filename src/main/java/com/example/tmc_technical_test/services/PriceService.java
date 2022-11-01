@@ -8,6 +8,6 @@ import org.threeten.bp.OffsetDateTime;
 
 public interface PriceService {
 
-    ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, OffsetDateTime date);
+    ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, String date);
 
 }
