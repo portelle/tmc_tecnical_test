@@ -1,27 +1,54 @@
 package com.example.tmc_technical_test.entities;
 
-import com.example.tmc_technical_test.models.Brand;
-import com.example.tmc_technical_test.models.Price;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "brands")
-public class BrandEntity extends Brand {
+public class BrandEntity{
+
     @Id
-    @Access(AccessType.PROPERTY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id = null;
+
+    private String brandName = null;
+
+/*
+
+    public PriceEntity getPriceEntity() {
+        return priceEntity;
+    }
+
+    public void setPriceEntity(PriceEntity priceEntity) {
+        this.priceEntity = priceEntity;
+    }
+
+    @OneToOne(mappedBy = "brands", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private PriceEntity priceEntity;
+*/
+
     public Integer getId() {
-        return super.getId();
+        return id;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "brand_name", nullable = false)
     public String getBrandName() {
-        return super.getBrandName();
+        return brandName;
     }
 
-    @OneToMany(mappedBy = "brands", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private PriceEntity price;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
 
 }

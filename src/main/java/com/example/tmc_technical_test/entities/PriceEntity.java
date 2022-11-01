@@ -1,73 +1,99 @@
 package com.example.tmc_technical_test.entities;
 
-import com.example.tmc_technical_test.models.Price;
-import org.springframework.data.jpa.repository.Temporal;
-import org.threeten.bp.OffsetDateTime;
+
+import lombok.NoArgsConstructor;
+import java.lang.String;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.SQLData;
 
 @Entity
+@NoArgsConstructor
 @Table(name= "prices")
-public class PriceEntity extends Price {
+public class PriceEntity {
+
+    private String startDate = null;
+
+    private String endDate = null;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer primary_Key;
+    private Integer priceList = null;
 
-    public void setBrand(BrandEntity brand) {
-        this.brand = brand;
+    private Integer productId = null;
+
+    private Integer priority = null;
+
+    private BigDecimal price = null;
+
+    private String currency = null;
+
+    public BrandEntity getBrandEntity() {
+        return brandEntity;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    public void setBrandEntity(BrandEntity brandEntity) {
+        this.brandEntity = brandEntity;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
-    private BrandEntity brand;
+    private BrandEntity brandEntity;
 
-    @Override
-    public Integer getBrandId() {
-        return brand.getId();
+    public String getStartDate() {
+        return startDate;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "start_date")
-    public OffsetDateTime getStartDate() {
-        return super.getStartDate();
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "end_date")
-    public OffsetDateTime getEndDate() {
-        return super.getEndDate();
+    public String getEndDate() {
+        return endDate;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "price_list")
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     public Integer getPriceList() {
-        return super.getPriceList();
+        return priceList;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "product_id")
+    public void setPriceList(Integer priceList) {
+        this.priceList = priceList;
+    }
+
     public Integer getProductId() {
-        return super.getProductId();
+        return productId;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "priority")
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
     public Integer getPriority() {
-        return super.getPriority();
+        return priority;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "price")
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
     public BigDecimal getPrice() {
-        return super.getPrice();
+        return price;
     }
 
-    @Access(AccessType.PROPERTY)
-    @Column(name = "currency")
-    public String getCurrency() {
-        return super.getCurrency();
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
 }
