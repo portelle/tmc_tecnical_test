@@ -33,17 +33,17 @@ public class PriceEntity {
     @Column(name = "currency")
     private String currency = null;
 
-    public BrandEntity getBrandEntity() {
-        return brandEntity;
+    public BrandEntity getBrand() {
+        return brand;
     }
 
-    public void setBrandEntity(BrandEntity brandEntity) {
-        this.brandEntity = brandEntity;
+    public void setBrand(BrandEntity brand) {
+        this.brand = brand;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
-    private BrandEntity brandEntity;
+    private BrandEntity brand;
 
     public String getStartDate() {
         return startDate;

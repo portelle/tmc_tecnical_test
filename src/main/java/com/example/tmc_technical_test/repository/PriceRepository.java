@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PriceRepository extends JpaRepository<PriceEntity, Integer> {
-    List<PriceEntity> findByStartDateBeforeAndEndDateAfter(String date, String dateCopy);
+    List<PriceEntity> findByBrand_IdIsAndProductIdIsAndStartDateBeforeAndEndDateAfter(Integer brandId, Integer productId, String date, String dateCopy);
 }
