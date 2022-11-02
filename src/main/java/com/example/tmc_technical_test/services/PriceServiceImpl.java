@@ -1,10 +1,8 @@
 package com.example.tmc_technical_test.services;
 
 import com.example.tmc_technical_test.entities.PriceEntity;
-
 import com.example.tmc_technical_test.models.PriceDTO;
 import com.example.tmc_technical_test.repository.PriceRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
