@@ -1,13 +1,9 @@
 package com.example.tmc_technical_test.entities;
 
 
-import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,20 +15,6 @@ public class BrandEntity{
     private Integer id = null;
 
     private String brandName = null;
-
-/*
-
-    public PriceEntity getPriceEntity() {
-        return priceEntity;
-    }
-
-    public void setPriceEntity(PriceEntity priceEntity) {
-        this.priceEntity = priceEntity;
-    }
-
-    @OneToOne(mappedBy = "brands", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private PriceEntity priceEntity;
-*/
 
     public Integer getId() {
         return id;
