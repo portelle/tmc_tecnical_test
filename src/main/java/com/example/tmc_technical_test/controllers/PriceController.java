@@ -26,7 +26,9 @@ public class PriceController implements PriceApi {
 
     @Override
     public ResponseEntity<PriceDTO> getPrice(Integer productId, Integer brandId, String date) {
-        return priceService.getPrice(productId, brandId, date);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                priceService.getPrice(productId, brandId, date)
+        );
     }
 
 }

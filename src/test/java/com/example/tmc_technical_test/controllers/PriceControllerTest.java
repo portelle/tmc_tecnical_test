@@ -1,11 +1,41 @@
 package com.example.tmc_technical_test.controllers;
 
+import com.example.tmc_technical_test.entities.PriceEntity;
+import com.example.tmc_technical_test.models.PriceDTO;
+import com.example.tmc_technical_test.repository.PriceRepository;
+import com.example.tmc_technical_test.services.PriceService;
 import com.example.tmc_technical_test.services.PriceServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 @WebMvcTest
 class PriceControllerTest {
@@ -13,41 +43,41 @@ class PriceControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Mock
+    private PriceRepository priceRepository;
+
     @MockBean
     private PriceServiceImpl priceService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @InjectMocks
+    private PriceController priceController;
 
-/*    @Test
-    void test1_sucess() throws Exception{
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-        BrandEntity brand = new BrandEntity();
-        brand.setBrandName("Zara");
-        brand.setId(1);
+    @Test
+    public void test1() throws Exception{
+        when(priceService.getPrice(anyInt(), anyInt(), anyString()))
+                .thenReturn(
+                        new PriceDTO().
+                                productId(1)
+                                .brandId(1)
+                                .priceList(2)
+                                .price(BigDecimal.valueOf(1))
+                                .currency("EUR")
+                                .startDate("2020-06-14-18.30.00")
+                                .endDate("2020-06-14-15.00.00")
+                );
 
-        PriceEntity price = new PriceEntity();
-        price.setBrand(brand);
-        price.setProductId(35455);
-        price.setBrandId(1);
-        price.setPriceList(1);
-        price.setStartDate("2020-01-01-01.01.01");
-        price.setEndDate("2020-01-01-01.01.01");
-        price.setPrice(BigDecimal.valueOf(35.50));
-        price.setPriority(0);
-        price.setCurrency("EUR");
-
-        ResponseEntity<PriceDTO> pricedto = ResponseEntity.status(HttpStatus.OK).body(ApiPriceDTO.mapEntityToDTO(price));
-
-        Mockito.when(priceService.getPrice(1,1,"yoquese")).thenReturn(pricedto);
-
-    mockMvc.perform(
-            MockMvcRequestBuilders.get("/price")
-                    .param("productId", String.valueOf(1))
-                    .param("brandId", String.valueOf(1))
-                    .param("date", "2022-11-01T10:07:54+01:00")
-    ).andExpect(MockMvcResultMatchers.status().isOk());
-    }*/
-
-
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/price")
+                        .param("productId", String.valueOf(1))
+                        .param("brandId", String.valueOf(1))
+                        .param("date", "2020-06-14-18.30.00")
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1));
+    }
 }

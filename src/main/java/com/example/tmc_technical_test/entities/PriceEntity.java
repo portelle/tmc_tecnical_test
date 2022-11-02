@@ -11,21 +11,26 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Table(name= "prices")
 public class PriceEntity {
-
+    @Column(name = "start_date")
     private String startDate = null;
 
+    @Column(name = "end_date")
     private String endDate = null;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer priceList = null;
 
+    @Column(name = "product_id")
     private Integer productId = null;
 
+    @Column(name = "priority")
     private Integer priority = null;
 
+    @Column(name = "price")
     private BigDecimal price = null;
 
+    @Column(name = "currency")
     private String currency = null;
 
     public BrandEntity getBrandEntity() {

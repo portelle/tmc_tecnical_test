@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
 public interface PriceRepository extends JpaRepository<PriceEntity, Integer> {
-    public List<PriceEntity> findByStartDateGreaterThanEqualAndEndDateLessThanEqual(String date, String dateCopy);
+    List<PriceEntity> findByStartDateBeforeAndEndDateAfter(String date, String dateCopy);
 }
