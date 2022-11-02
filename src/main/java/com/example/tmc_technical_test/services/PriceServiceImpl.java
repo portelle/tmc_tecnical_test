@@ -6,11 +6,8 @@ import com.example.tmc_technical_test.models.PriceDTO;
 import com.example.tmc_technical_test.repository.PriceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +18,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public PriceDTO getPrice(Integer productId, Integer brandId, String date) {
-        List<PriceEntity> priceEntitiesList = priceRepository.findByStartDateBeforeAndEndDateAfter(date, date);
+        List<PriceEntity> priceEntitiesList = priceRepository.findByBrand_IdIsAndProductIdIsAndStartDateBeforeAndEndDateAfter(brandId, productId, date, date);
         PriceDTO priceDTO = new PriceDTO();
 
         int higestPrio = priceEntitiesList.stream()
@@ -35,7 +32,7 @@ public class PriceServiceImpl implements PriceService {
 
         return priceDTO
                 .productId(higestPrioPrices.get(0).getProductId())
-                .brandId(higestPrioPrices.get(0).getBrandEntity().getId())
+                .brandId(higestPrioPrices.get(0).getBrand().getId())
                 .priceList(higestPrioPrices.get(0).getPriceList())
                 .price(higestPrioPrices.get(0).getPrice())
                 .currency(higestPrioPrices.get(0).getCurrency())
