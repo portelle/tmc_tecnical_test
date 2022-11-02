@@ -2,7 +2,6 @@ package com.example.tmc_technical_test.entities;
 
 
 import lombok.NoArgsConstructor;
-import java.lang.String;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
